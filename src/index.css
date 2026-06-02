@@ -3,15 +3,16 @@
 @theme {
   --font-serif: "Shippori Mincho", Georgia, serif;
   --font-sans: "Noto Sans TC", system-ui, sans-serif;
-  --color-kanban-bg: #f5f3ee;
-  --color-column-bg: #edeae3;
-  --color-brand-todo: #7B96B2;
-  --color-brand-doing: #D4A017;
-  --color-brand-done: #8DA399;
+  --color-kanban-bg: #0b0c0e;
+  --color-column-bg: #15161a;
+  --color-brand-todo: #bca374;
+  --color-brand-doing: #f3c677;
+  --color-brand-done: #8a7b60;
 }
 
 body {
-  background-color: #f5f3ee;
-  color: #333333;
+  background-color: #0b0c0e;
+  color: #f1ebd9;
   font-family: "Noto Sans TC", system-ui, sans-serif;
 }
+
