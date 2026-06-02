@@ -183,7 +183,7 @@ export default function App() {
     if (!text) return null;
     const lines = text.split('\n');
     return (
-      <div className="space-y-2 text-sm text-neutral-300 leading-relaxed font-sans">
+      <div className="space-y-2 text-sm text-[#D1C2AD] leading-relaxed font-sans">
         {lines.map((line, idx) => {
           let cleanLine = line.trim();
           if (!cleanLine) return <div key={idx} className="h-1.5"></div>;
@@ -198,7 +198,7 @@ export default function App() {
           const parts = cleanLine.split(/\*\*(.*?)\*\*/g);
           const innerContent = parts.map((part, pIdx) => {
             if (pIdx % 2 === 1) {
-              return <strong key={pIdx} className="font-bold text-white">{part}</strong>;
+              return <strong key={pIdx} className="font-bold text-[#F5EBE1]">{part}</strong>;
             }
             return part;
           });
@@ -206,7 +206,7 @@ export default function App() {
           if (isBullet) {
             return (
               <div key={idx} className="flex items-start gap-1.5 pl-1">
-                <span className="text-[#E67E22] mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#E67E22]"></span>
+                <span className="text-[#D9AD4A] mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#D9AD4A]"></span>
                 <span className="flex-grow">{innerContent}</span>
               </div>
             );
@@ -316,49 +316,49 @@ export default function App() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#0b0c0e] text-neutral-100 flex flex-col p-4 md:p-8 font-sans select-none" id="app_container">
+    <div className="w-full min-h-screen bg-[#0A0806] text-[#E3D7C5] flex flex-col p-4 md:p-8 font-sans select-none" id="app_container">
       {/* Header section with responsive layout */}
       <header className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4" id="app_header">
         <div>
-          <h1 className="text-3xl md:text-4xl font-serif text-white tracking-tight font-bold" id="app_title">
-            個人任務看板 <span className="text-sm font-sans font-normal text-[#bca374] ml-2 uppercase tracking-widest block sm:inline mt-1 sm:mt-0">Task Orchestrator</span>
+          <h1 className="text-3xl md:text-4xl font-serif text-[#F5EBE1] tracking-tight font-bold" id="app_title">
+            個人任務看板 <span className="text-sm font-sans font-normal text-[#D9AD4A] ml-2 uppercase tracking-widest block sm:inline mt-1 sm:mt-0">Task Orchestrator</span>
           </h1>
         </div>
         <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end" id="app_meta">
           <button
             onClick={handleReset}
-            className="flex items-center gap-1.5 text-xs text-neutral-400 hover:text-[#0b0c0e] bg-[#15161a] hover:bg-[#bca374] px-3 py-1.5 rounded-[6px] border border-[#2c2f3b] transition-all cursor-pointer font-medium"
+            className="flex items-center gap-1.5 text-xs text-[#AFA18F] hover:text-[#1C1915] bg-[#14110E] hover:bg-[#D9AD4A] px-3 py-1.5 rounded-[6px] border border-[#382F24] transition-all cursor-pointer font-medium"
             title="重設為預設任務"
             id="btn_reset"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>重設看板</span>
           </button>
-          <div className="text-xs text-neutral-500 font-mono bg-[#15161a] px-3 py-1.5 rounded-full border border-[#2c2f3b]" id="status_indicator">
+          <div className="text-xs text-[#948777] font-mono bg-[#14110E] px-3 py-1.5 rounded-full border border-[#382F24]" id="status_indicator">
             STATUS: LOCAL_STORAGE_ACTIVE
           </div>
         </div>
       </header>
 
       {/* Gemini AI Consultation Panel */}
-      <section className="mb-8 bg-[#15161a] border border-[#2c2f3b] rounded-[8px] p-4 md:p-6 shadow-sm flex flex-col lg:flex-row gap-6 items-stretch" id="gemini_consultation_section">
+      <section className="mb-8 bg-[#14110E] border border-[#382F24] rounded-[8px] p-4 md:p-6 shadow-none ring-1 ring-[#ffffff]/5 flex flex-col lg:flex-row gap-6 items-stretch" id="gemini_consultation_section">
         {/* Left Part: Ask Question */}
         <div className="flex-1 flex flex-col justify-between space-y-4">
           <div className="flex items-start gap-3">
-            <div className="bg-[#f3c677]/10 p-2 rounded-lg text-[#f3c677] flex-shrink-0 mt-0.5">
+            <div className="bg-[#EBC463]/10 p-2 rounded-lg text-[#EBC463] flex-shrink-0 mt-0.5">
               <Sparkles className="w-5 h-5" />
             </div>
             <div className="w-full">
-              <h2 className="text-lg font-bold text-white font-sans flex items-center gap-1.5">
+              <h2 className="text-lg font-bold text-[#F5EBE1] font-sans flex items-center gap-1.5">
                 AI 智慧敏捷教練
               </h2>
-              <p className="text-xs text-neutral-400 font-sans leading-relaxed">
+              <p className="text-xs text-[#AFA18F] font-sans leading-relaxed">
                 隨時擷取您當前任務看板的所有進度（待辦、進行中、已完成），給予最即時、客製化的拆解建議與效率診斷。
               </p>
               
               {/* User API Key setting area with secure visual design and client persistence */}
-              <div className="mt-3 flex flex-col md:flex-row items-stretch md:items-center gap-3 bg-[#1d1911] border border-[#3e321a] rounded-[6px] p-3 w-full" id="api_key_setting_bar">
-                <span className="text-xs font-bold text-[#f3c677] whitespace-nowrap flex items-center gap-1.5" id="lbl_api_key">
+              <div className="mt-3 flex flex-col md:flex-row items-stretch md:items-center gap-3 bg-[#1A1612] border border-[#423628] rounded-[6px] p-3 w-full" id="api_key_setting_bar">
+                <span className="text-xs font-bold text-[#EBC463] whitespace-nowrap flex items-center gap-1.5" id="lbl_api_key">
                   🔑 您的 Gemini API Key：
                 </span>
                 <div className="relative flex-1 flex items-center gap-2" id="api_key_input_wrapper">
@@ -371,25 +371,25 @@ export default function App() {
                       localStorage.setItem('user_gemini_api_key', val);
                     }}
                     placeholder="請輸入您的個人金鑰 (AIzaSy...)"
-                    className="flex-1 min-w-0 bg-[#121316] border border-[#2c2f3b] text-xs rounded-[4px] px-3 py-1.5 focus:ring-1 focus:ring-[#f3c677] focus:border-[#f3c677] outline-none text-white font-mono"
+                    className="flex-1 min-w-0 bg-[#1C1915] border border-[#382F24] text-xs rounded-[4px] px-3 py-1.5 focus:ring-1 focus:ring-[#DBAE4A] focus:border-[#DBAE4A] outline-none text-[#F5EBE1] font-mono"
                     id="input_user_api_key"
                   />
                   <button
                     type="button"
                     onClick={() => setShowKey(!showKey)}
-                    className="px-2 py-1 text-xs text-neutral-300 hover:text-white bg-[#1a1b20] border border-[#2c2f3b] hover:border-[#f3c677] rounded-[4px] transition-all cursor-pointer select-none whitespace-nowrap"
+                    className="px-2 py-1 text-xs text-[#D1C2AD] hover:text-[#F5EBE1] bg-[#2C251C] border border-[#382F24] hover:border-[#382F24] rounded-[4px] transition-all cursor-pointer select-none whitespace-nowrap"
                     id="btn_toggle_key_visibility"
                   >
                     {showKey ? "隱藏" : "顯示"}
                   </button>
                   {userApiKey.trim() ? (
-                    <span className="text-xs text-green-400 font-bold whitespace-nowrap flex items-center gap-1" id="key_status_active">
-                      <span className="w-2 h-2 rounded-full bg-green-500 inline-block"></span>
+                    <span className="text-xs text-green-600 font-bold whitespace-nowrap flex items-center gap-1" id="key_status_active">
+                      <span className="w-2 h-2 rounded-full bg-green-600 inline-block"></span>
                       已設定金鑰 (儲存於本機)
                     </span>
                   ) : (
-                    <span className="text-xs text-[#f3c677] font-semibold whitespace-nowrap flex items-center gap-1" id="key_status_missing">
-                      <span className="w-2 h-2 rounded-full bg-[#f3c677] inline-block animate-pulse"></span>
+                    <span className="text-xs text-[#EBC463] font-semibold whitespace-nowrap flex items-center gap-1" id="key_status_missing">
+                      <span className="w-2 h-2 rounded-full bg-[#FADE8C] inline-block animate-pulse"></span>
                       待設定金鑰
                     </span>
                   )}
@@ -399,7 +399,7 @@ export default function App() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-[11px] font-bold text-neutral-400 font-sans uppercase tracking-wider block">
+            <label className="text-[11px] font-bold text-[#AFA18F] font-sans uppercase tracking-wider block">
               快速推薦諮詢點：
             </label>
             <div className="flex flex-wrap gap-2">
@@ -411,7 +411,7 @@ export default function App() {
                     handleAiConsult(preset.prompt);
                   }}
                   disabled={isAiLoading}
-                  className="px-3 py-1.5 rounded-[6px] text-xs font-medium text-neutral-300 bg-[#22242d] border border-[#2c2f3b] hover:border-[#f3c677] hover:text-[#f3c677] transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-3 py-1.5 rounded-[6px] text-xs font-medium text-[#D1C2AD] bg-[#1C1915] border border-[#382F24] hover:border-[#382F24] hover:text-[#EBC463] transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {preset.label}
                 </button>
@@ -429,12 +429,12 @@ export default function App() {
               }}
               placeholder="有新項目要規劃？或是想問任何敏捷專案管理問題...？"
               disabled={isAiLoading}
-              className="flex-1 min-w-0 bg-[#121316] border border-[#2c2f3b] text-sm text-white rounded-[6px] px-3.5 py-2.5 focus:ring-1 focus:ring-[#f3c677] focus:border-[#f3c677] outline-none transition-all placeholder-neutral-500 font-sans"
+              className="flex-1 min-w-0 bg-[#1C1915] border border-[#382F24] text-sm text-[#F5EBE1] rounded-[6px] px-3.5 py-2.5 focus:ring-1 focus:ring-[#DBAE4A] focus:border-[#DBAE4A] outline-none transition-all placeholder-[#8A7D6E] font-sans"
             />
             <button
               onClick={() => handleAiConsult()}
               disabled={isAiLoading || !aiPrompt.trim()}
-              className="bg-[#bca374] hover:bg-[#d8c091] text-[#0b0c0e] px-5 py-2.5 rounded-[6px] flex items-center justify-center gap-1.5 font-sans font-bold text-sm transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-[#D9AD4A] hover:bg-[#F2C861] text-[#1C1915] px-5 py-2.5 rounded-[6px] flex items-center justify-center gap-1.5 font-sans font-bold text-sm transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isAiLoading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -447,16 +447,16 @@ export default function App() {
         </div>
 
         {/* Right Part: Gemini Answer beside it */}
-        <div className="lg:w-1/2 border-t lg:border-t-0 lg:border-l border-[#2c2f3b] pt-5 lg:pt-0 lg:pl-6 flex flex-col justify-between min-h-[180px]">
+        <div className="lg:w-1/2 border-t lg:border-t-0 lg:border-l border-[#382F24] pt-5 lg:pt-0 lg:pl-6 flex flex-col justify-between min-h-[180px]">
           <div className="flex justify-between items-center mb-3">
-            <div className="flex items-center gap-2 text-xs font-bold text-neutral-400 uppercase tracking-widest font-sans">
-              <Bot className="w-4 h-4 text-[#bca374]" />
+            <div className="flex items-center gap-2 text-xs font-bold text-[#AFA18F] uppercase tracking-widest font-sans">
+              <Bot className="w-4 h-4 text-[#D9AD4A]" />
               <span>教練解答與提示區</span>
             </div>
             {aiResponse && (
               <button 
                 onClick={() => { setAiResponse(''); setAiPrompt(''); }}
-                className="text-[10px] text-neutral-500 hover:text-[#f3c677] cursor-pointer underline transition-colors"
+                className="text-[10px] text-[#948777] hover:text-[#EBC463] cursor-pointer underline transition-colors"
                 id="btn_clear_ai"
               >
                 清除內容
@@ -464,35 +464,35 @@ export default function App() {
             )}
           </div>
 
-          <div className="flex-grow bg-[#121316] border border-[#2c2f3b] rounded-[6px] p-4 overflow-y-auto max-h-[220px]" id="ai_response_box">
+          <div className="flex-grow bg-[#1C1915] border border-[#382F24] rounded-[6px] p-4 overflow-y-auto max-h-[220px]" id="ai_response_box">
             {isAiLoading && (
-              <div className="h-full flex flex-col items-center justify-center py-8 text-neutral-500 text-xs gap-3">
-                <Loader2 className="w-6 h-6 animate-spin text-[#f3c677]" />
+              <div className="h-full flex flex-col items-center justify-center py-8 text-[#948777] text-xs gap-3">
+                <Loader2 className="w-6 h-6 animate-spin text-[#EBC463]" />
                 <span className="font-sans animate-pulse tracking-wide font-medium">Gemini 正在讀取看板並深度研究最佳方案...</span>
               </div>
             )}
             
             {!isAiLoading && aiError && (
-              <div className="bg-red-950/40 border border-red-900/50 rounded-[6px] p-3.5 text-red-200 text-xs flex gap-2 items-start">
-                <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-red-400" />
+              <div className="bg-red-50 border border-red-200 rounded-[6px] p-3.5 text-red-700 text-xs flex gap-2 items-start">
+                <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-red-500" />
                 <div className="space-y-1">
-                  <p className="font-bold text-red-350">連線或設定異常</p>
+                  <p className="font-bold text-red-800">連線或設定異常</p>
                   <p className="leading-relaxed opacity-90">{aiError}</p>
                 </div>
               </div>
             )}
 
             {!isAiLoading && !aiError && aiResponse && (
-              <div className="prose max-w-none text-neutral-300 leading-relaxed text-sm">
+              <div className="prose max-w-none text-[#D1C2AD] leading-relaxed text-sm">
                 {renderAIResponse(aiResponse)}
               </div>
             )}
 
             {!isAiLoading && !aiError && !aiResponse && (
-              <div className="h-full flex flex-col items-center justify-center py-6 text-neutral-500 text-center">
-                <HelpCircle className="w-8 h-8 text-neutral-600 mb-2" />
-                <p className="text-xs font-sans font-medium text-neutral-400">尚無諮詢內容</p>
-                <p className="text-[11px] text-neutral-500 mt-1 max-w-xs mx-auto leading-normal">
+              <div className="h-full flex flex-col items-center justify-center py-6 text-[#948777] text-center">
+                <HelpCircle className="w-8 h-8 text-[#73685B] mb-2" />
+                <p className="text-xs font-sans font-medium text-[#AFA18F]">尚無諮詢內容</p>
+                <p className="text-[11px] text-[#948777] mt-1 max-w-xs mx-auto leading-normal">
                   點擊左側推薦的快速諮詢按鈕，或是輸入自訂疑問。Gemini 將會依據您當前的看板狀態提供策略。
                 </p>
               </div>
@@ -508,20 +508,20 @@ export default function App() {
           onDragOver={(e) => handleDragOverCol(e, 'todo')}
           onDragLeave={() => handleDragLeaveCol('todo')}
           onDrop={(e) => handleDropOnCol(e, 'todo')}
-          className={`flex flex-col bg-[#15161a] rounded-[6px] p-4 min-h-[450px] md:h-[calc(100vh-170px)] transition-all duration-200 ${
-            dragOverCol === 'todo' ? 'bg-[#1c1d24] ring-2 ring-[#bca374]/40' : ''
+          className={`flex flex-col bg-[#14110E] rounded-[6px] p-4 min-h-[450px] md:h-[calc(100vh-170px)] transition-all duration-200 ${
+            dragOverCol === 'todo' ? 'bg-[#1C1915] ring-2 ring-[#D9AD4A]/40' : ''
           }`} 
           id="col_todo_container"
         >
-          <div className="flex justify-between items-center mb-4 pb-2 border-b border-[#2c2f3b]" id="col_todo_header">
-            <h2 className="font-bold text-neutral-200 tracking-wide font-sans">待辦事項</h2>
-            <span id="count-todo" className="px-2.5 py-0.5 rounded-full text-xs font-bold text-[#bca374] bg-[#bca374]/10 border border-[#bca374]/20 transition-all duration-300">
+          <div className="flex justify-between items-center mb-4 pb-2 border-b border-[#382F24]" id="col_todo_header">
+            <h2 className="font-bold text-[#E3D7C5] tracking-wide font-sans">待辦事項</h2>
+            <span id="count-todo" className="px-2.5 py-0.5 rounded-full text-xs font-bold text-[#BE984D] bg-[#D9AD4A]/15 border border-[#D9AD4A]/30 transition-all duration-300">
               {state.todo.length}
             </span>
           </div>
           <div id="list-todo" className="flex-1 overflow-y-auto space-y-3 pr-1 max-h-[350px] md:max-h-none">
             {state.todo.length === 0 ? (
-              <div className="text-center py-8 text-neutral-500 text-xs italic font-sans" id="todo_empty_tip">
+              <div className="text-center py-8 text-[#948777] text-xs italic font-sans" id="todo_empty_tip">
                 尚無待辦事項
               </div>
             ) : (
@@ -537,32 +537,32 @@ export default function App() {
                     onDragOver={(e) => handleDragOverCard(e, 'todo', i)}
                     onDragLeave={handleDragLeaveCard}
                     onDrop={(e) => handleDropOnCard(e, 'todo', i)}
-                    className={`bg-[#22242d] p-3 rounded-[6px] group transition-all duration-200 border border-[#2c2f3b] hover:border-[#bca374]/40 cursor-grab active:cursor-grabbing ${
-                      isDragging ? 'opacity-40 scale-95 border-dashed border-[#bca374]' : ''
+                    className={`bg-[#1C1915] p-3 rounded-[6px] shadow-none ring-1 ring-[#ffffff]/5 group transition-all duration-200 border border-[#382F24] hover:border-[#D9AD4A]/60 cursor-grab active:cursor-grabbing ${
+                      isDragging ? 'opacity-40 scale-95 border-dashed border-[#D9AD4A]' : ''
                     } ${
-                      isOver ? 'border-t-2 border-t-[#f3c677] pt-2 scale-[1.01]' : ''
+                      isOver ? 'border-t-2 border-t-[#EBC463] pt-2 scale-[1.01]' : ''
                     }`} 
                     id={`card-todo-${i}`}
                   >
                     <div className="flex gap-2 items-start mb-2" id={`card-content-todo-${i}`}>
-                      <GripVertical className="w-4 h-4 text-neutral-600 mt-0.5 cursor-grab active:cursor-grabbing flex-shrink-0 group-hover:text-neutral-400 transition-colors" />
-                      <div className="text-sm text-neutral-100 leading-relaxed font-sans font-medium break-all flex-grow">
+                      <GripVertical className="w-4 h-4 text-[#73685B] mt-0.5 cursor-grab active:cursor-grabbing flex-shrink-0 group-hover:text-[#AFA18F] transition-colors" />
+                      <div className="text-sm text-[#E3D7C5] leading-relaxed font-sans font-medium break-all flex-grow">
                         {task}
                       </div>
                     </div>
-                    <div className="flex justify-between items-center opacity-60 md:opacity-40 group-hover:opacity-100 transition-opacity pt-2 border-t border-[#181a1f]" id={`card-opts-todo-${i}`}>
+                    <div className="flex justify-between items-center opacity-60 md:opacity-40 group-hover:opacity-100 transition-opacity pt-2 border-t border-[#14110E]" id={`card-opts-todo-${i}`}>
                       <div className="flex gap-1" id={`card-moves-todo-${i}`}>
                         {/* Left arrow hidden or disabled for Todo */}
                         <button
                           disabled
-                          className="w-6 h-6 flex items-center justify-center text-neutral-700 bg-neutral-900/30 rounded cursor-not-allowed opacity-50"
+                          className="w-6 h-6 flex items-center justify-center text-[#948777] bg-[#171410] rounded cursor-not-allowed opacity-50"
                           id={`btn-left-todo-${i}`}
                         >
                           ‹
                         </button>
                         <button
                           onClick={(e) => { e.stopPropagation(); moveTask('todo', i, 1); }}
-                          className="w-6 h-6 flex items-center justify-center text-neutral-300 hover:text-black hover:bg-[#f3c677] bg-[#121316] rounded transition-colors cursor-pointer"
+                          className="w-6 h-6 flex items-center justify-center text-[#D1C2AD] hover:text-[#1C1915] hover:bg-[#EBC463] bg-[#1C1915] rounded transition-colors cursor-pointer"
                           id={`btn-right-todo-${i}`}
                         >
                           ›
@@ -570,7 +570,7 @@ export default function App() {
                       </div>
                       <button
                         onClick={(e) => { e.stopPropagation(); removeTask('todo', i); }}
-                        className="text-[10px] uppercase tracking-tighter text-red-400 hover:text-red-500 font-sans cursor-pointer font-medium"
+                        className="text-[10px] uppercase tracking-tighter text-red-500 hover:text-red-500 font-sans cursor-pointer font-medium"
                         id={`btn-delete-todo-${i}`}
                       >
                         Delete
@@ -581,7 +581,7 @@ export default function App() {
               })
             )}
           </div>
-          <div className="mt-4 pt-4 border-t border-[#2c2f3b]" id="todo_add_container">
+          <div className="mt-4 pt-4 border-t border-[#382F24]" id="todo_add_container">
             <div className="flex gap-2">
               <input
                 type="text"
@@ -590,11 +590,11 @@ export default function App() {
                 onKeyDown={(e) => handleKeyDown(e, 'todo')}
                 id="input-todo"
                 placeholder="新增任務..."
-                className="flex-1 bg-[#121316] border border-[#2c2f3b] text-white rounded-[6px] px-3 py-2 text-sm focus:ring-1 focus:ring-[#f3c677] focus:border-[#f3c677] outline-none transition-all placeholder-neutral-500 font-sans"
+                className="flex-1 bg-[#1C1915] border border-[#382F24] text-[#F5EBE1] rounded-[6px] px-3 py-2 text-sm focus:ring-1 focus:ring-[#DBAE4A] focus:border-[#DBAE4A] outline-none transition-all placeholder-[#8A7D6E] font-sans"
               />
               <button
                 onClick={() => handleAddTask('todo')}
-                className="bg-[#22242d] text-neutral-400 hover:text-black hover:bg-[#bca374] w-10 h-9 rounded-[6px] flex items-center justify-center transition-colors font-sans font-bold text-lg select-none cursor-pointer"
+                className="bg-[#1C1915] text-[#AFA18F] hover:text-[#1C1915] hover:bg-[#D9AD4A] w-10 h-9 rounded-[6px] flex items-center justify-center transition-colors font-sans font-bold text-lg select-none cursor-pointer"
                 id="btn-add-todo"
               >
                 +
@@ -608,20 +608,20 @@ export default function App() {
           onDragOver={(e) => handleDragOverCol(e, 'doing')}
           onDragLeave={() => handleDragLeaveCol('doing')}
           onDrop={(e) => handleDropOnCol(e, 'doing')}
-          className={`flex flex-col bg-[#15161a] rounded-[6px] p-4 min-h-[450px] md:h-[calc(100vh-170px)] transition-all duration-200 ${
-            dragOverCol === 'doing' ? 'bg-[#1c1d24] ring-2 ring-[#f3c677]/40' : ''
+          className={`flex flex-col bg-[#14110E] rounded-[6px] p-4 min-h-[450px] md:h-[calc(100vh-170px)] transition-all duration-200 ${
+            dragOverCol === 'doing' ? 'bg-[#1C1915] ring-2 ring-[#EBC463]/40' : ''
           }`} 
           id="col_doing_container"
         >
-          <div className="flex justify-between items-center mb-4 pb-2 border-b border-[#2c2f3b]" id="col_doing_header">
-            <h2 className="font-bold text-neutral-200 tracking-wide font-sans">進行中</h2>
-            <span id="count-doing" className="px-2.5 py-0.5 rounded-full text-xs font-bold text-[#f3c677] bg-[#f3c677]/10 border border-[#f3c677]/20 transition-all duration-300">
+          <div className="flex justify-between items-center mb-4 pb-2 border-b border-[#382F24]" id="col_doing_header">
+            <h2 className="font-bold text-[#E3D7C5] tracking-wide font-sans">進行中</h2>
+            <span id="count-doing" className="px-2.5 py-0.5 rounded-full text-xs font-bold text-[#EBC463] bg-[#EBC463]/10 border border-[#EBC463]/20 transition-all duration-300">
               {state.doing.length}
             </span>
           </div>
           <div id="list-doing" className="flex-1 overflow-y-auto space-y-3 pr-1 max-h-[350px] md:max-h-none">
             {state.doing.length === 0 ? (
-              <div className="text-center py-8 text-neutral-500 text-xs italic font-sans" id="doing_empty_tip">
+              <div className="text-center py-8 text-[#948777] text-xs italic font-sans" id="doing_empty_tip">
                 尚無進行中任務
               </div>
             ) : (
@@ -637,31 +637,31 @@ export default function App() {
                     onDragOver={(e) => handleDragOverCard(e, 'doing', i)}
                     onDragLeave={handleDragLeaveCard}
                     onDrop={(e) => handleDropOnCard(e, 'doing', i)}
-                    className={`bg-[#22242d] p-3 rounded-[6px] group transition-all duration-200 border border-[#2c2f3b] hover:border-[#f3c677]/40 cursor-grab active:cursor-grabbing ${
-                      isDragging ? 'opacity-40 scale-95 border-dashed border-[#f3c677]' : ''
+                    className={`bg-[#1C1915] p-3 rounded-[6px] shadow-none ring-1 ring-[#ffffff]/5 group transition-all duration-200 border border-[#382F24] hover:border-[#382F24]/40 cursor-grab active:cursor-grabbing ${
+                      isDragging ? 'opacity-40 scale-95 border-dashed border-[#EBC463]' : ''
                     } ${
-                      isOver ? 'border-t-2 border-t-[#f3c677] pt-2 scale-[1.01]' : ''
+                      isOver ? 'border-t-2 border-t-[#EBC463] pt-2 scale-[1.01]' : ''
                     }`} 
                     id={`card-doing-${i}`}
                   >
                     <div className="flex gap-2 items-start mb-2" id={`card-content-doing-${i}`}>
-                      <GripVertical className="w-4 h-4 text-neutral-600 mt-0.5 cursor-grab active:cursor-grabbing flex-shrink-0 group-hover:text-neutral-400 transition-colors" />
-                      <div className="text-sm text-neutral-100 leading-relaxed font-sans font-medium break-all flex-grow">
+                      <GripVertical className="w-4 h-4 text-[#73685B] mt-0.5 cursor-grab active:cursor-grabbing flex-shrink-0 group-hover:text-[#AFA18F] transition-colors" />
+                      <div className="text-sm text-[#E3D7C5] leading-relaxed font-sans font-medium break-all flex-grow">
                         {task}
                       </div>
                     </div>
-                    <div className="flex justify-between items-center opacity-60 md:opacity-40 group-hover:opacity-100 transition-opacity pt-2 border-t border-[#181a1f]" id={`card-opts-doing-${i}`}>
+                    <div className="flex justify-between items-center opacity-60 md:opacity-40 group-hover:opacity-100 transition-opacity pt-2 border-t border-[#14110E]" id={`card-opts-doing-${i}`}>
                       <div className="flex gap-1" id={`card-moves-doing-${i}`}>
                         <button
                           onClick={(e) => { e.stopPropagation(); moveTask('doing', i, -1); }}
-                          className="w-6 h-6 flex items-center justify-center text-neutral-300 hover:text-black hover:bg-[#f3c677] bg-[#121316] rounded transition-colors cursor-pointer"
+                          className="w-6 h-6 flex items-center justify-center text-[#D1C2AD] hover:text-[#1C1915] hover:bg-[#EBC463] bg-[#1C1915] rounded transition-colors cursor-pointer"
                           id={`btn-left-doing-${i}`}
                         >
                           ‹
                         </button>
                         <button
                           onClick={(e) => { e.stopPropagation(); moveTask('doing', i, 1); }}
-                          className="w-6 h-6 flex items-center justify-center text-neutral-300 hover:text-black hover:bg-[#f3c677] bg-[#121316] rounded transition-colors cursor-pointer"
+                          className="w-6 h-6 flex items-center justify-center text-[#D1C2AD] hover:text-[#1C1915] hover:bg-[#EBC463] bg-[#1C1915] rounded transition-colors cursor-pointer"
                           id={`btn-right-doing-${i}`}
                         >
                           ›
@@ -669,7 +669,7 @@ export default function App() {
                       </div>
                       <button
                         onClick={(e) => { e.stopPropagation(); removeTask('doing', i); }}
-                        className="text-[10px] uppercase tracking-tighter text-red-400 hover:text-red-500 font-sans cursor-pointer font-medium"
+                        className="text-[10px] uppercase tracking-tighter text-red-500 hover:text-red-500 font-sans cursor-pointer font-medium"
                         id={`btn-delete-doing-${i}`}
                       >
                         Delete
@@ -680,7 +680,7 @@ export default function App() {
               })
             )}
           </div>
-          <div className="mt-4 pt-4 border-t border-[#2c2f3b]" id="doing_add_container">
+          <div className="mt-4 pt-4 border-t border-[#382F24]" id="doing_add_container">
             <div className="flex gap-2">
               <input
                 type="text"
@@ -689,11 +689,11 @@ export default function App() {
                 onKeyDown={(e) => handleKeyDown(e, 'doing')}
                 id="input-doing"
                 placeholder="追蹤進度..."
-                className="flex-1 bg-[#121316] border border-[#2c2f3b] text-white rounded-[6px] px-3 py-2 text-sm focus:ring-1 focus:ring-[#f3c677] focus:border-[#f3c677] outline-none transition-all placeholder-neutral-500 font-sans"
+                className="flex-1 bg-[#1C1915] border border-[#382F24] text-[#F5EBE1] rounded-[6px] px-3 py-2 text-sm focus:ring-1 focus:ring-[#DBAE4A] focus:border-[#DBAE4A] outline-none transition-all placeholder-[#8A7D6E] font-sans"
               />
               <button
                 onClick={() => handleAddTask('doing')}
-                className="bg-[#22242d] text-neutral-400 hover:text-black hover:bg-[#f3c677] w-10 h-9 rounded-[6px] flex items-center justify-center transition-colors font-sans font-bold text-lg select-none cursor-pointer"
+                className="bg-[#1C1915] text-[#AFA18F] hover:text-[#1C1915] hover:bg-[#EBC463] w-10 h-9 rounded-[6px] flex items-center justify-center transition-colors font-sans font-bold text-lg select-none cursor-pointer"
                 id="btn-add-doing"
               >
                 +
@@ -707,20 +707,20 @@ export default function App() {
           onDragOver={(e) => handleDragOverCol(e, 'done')}
           onDragLeave={() => handleDragLeaveCol('done')}
           onDrop={(e) => handleDropOnCol(e, 'done')}
-          className={`flex flex-col bg-[#15161a] rounded-[6px] p-4 min-h-[450px] md:h-[calc(100vh-170px)] transition-all duration-200 ${
-            dragOverCol === 'done' ? 'bg-[#1c1d24] ring-2 ring-[#8a7b60]/40' : ''
+          className={`flex flex-col bg-[#14110E] rounded-[6px] p-4 min-h-[450px] md:h-[calc(100vh-170px)] transition-all duration-200 ${
+            dragOverCol === 'done' ? 'bg-[#1C1915] ring-2 ring-[#BE984D]/40' : ''
           }`} 
           id="col_done_container"
         >
-          <div className="flex justify-between items-center mb-4 pb-2 border-b border-[#2c2f3b]" id="col_done_header">
-            <h2 className="font-bold text-neutral-200 tracking-wide font-sans">已完成</h2>
-            <span id="count-done" className="px-2.5 py-0.5 rounded-full text-xs font-bold text-[#8a7b60] bg-[#8a7b60]/10 border border-[#8a7b60]/20 transition-all duration-300">
+          <div className="flex justify-between items-center mb-4 pb-2 border-b border-[#382F24]" id="col_done_header">
+            <h2 className="font-bold text-[#E3D7C5] tracking-wide font-sans">已完成</h2>
+            <span id="count-done" className="px-2.5 py-0.5 rounded-full text-xs font-bold text-[#BE984D] bg-[#BE984D]/10 border border-[#BE984D]/20 transition-all duration-300">
               {state.done.length}
             </span>
           </div>
           <div id="list-done" className="flex-1 overflow-y-auto space-y-3 pr-1 max-h-[350px] md:max-h-none">
             {state.done.length === 0 ? (
-              <div className="text-center py-8 text-neutral-500 text-xs italic font-sans" id="done_empty_tip">
+              <div className="text-center py-8 text-[#948777] text-xs italic font-sans" id="done_empty_tip">
                 尚未完成任何任務
               </div>
             ) : (
@@ -736,24 +736,24 @@ export default function App() {
                     onDragOver={(e) => handleDragOverCard(e, 'done', i)}
                     onDragLeave={handleDragLeaveCard}
                     onDrop={(e) => handleDropOnCard(e, 'done', i)}
-                    className={`bg-[#22242d] p-3 rounded-[6px] group transition-all duration-200 border border-[#2c2f3b] hover:border-[#8a7b60]/40 cursor-grab active:cursor-grabbing ${
-                      isDragging ? 'opacity-40 scale-95 border-dashed border-[#8a7b60]' : ''
+                    className={`bg-[#1C1915] p-3 rounded-[6px] shadow-none ring-1 ring-[#ffffff]/5 group transition-all duration-200 border border-[#382F24] hover:border-[#BE984D]/40 cursor-grab active:cursor-grabbing ${
+                      isDragging ? 'opacity-40 scale-95 border-dashed border-[#BE984D]' : ''
                     } ${
-                      isOver ? 'border-t-2 border-t-[#8a7b60] pt-2 scale-[1.01]' : ''
+                      isOver ? 'border-t-2 border-t-[#BE984D] pt-2 scale-[1.01]' : ''
                     }`} 
                     id={`card-done-${i}`}
                   >
                     <div className="flex gap-2 items-start mb-2" id={`card-content-done-${i}`}>
-                      <GripVertical className="w-4 h-4 text-neutral-600 mt-0.5 cursor-grab active:cursor-grabbing flex-shrink-0 group-hover:text-neutral-400 transition-colors" />
-                      <div className="text-sm text-neutral-450 leading-relaxed font-sans break-all line-through decoration-neutral-600 flex-grow font-medium">
+                      <GripVertical className="w-4 h-4 text-[#73685B] mt-0.5 cursor-grab active:cursor-grabbing flex-shrink-0 group-hover:text-[#AFA18F] transition-colors" />
+                      <div className="text-sm text-[#D1C2AD] leading-relaxed font-sans break-all line-through decoration-[#5B4F42] flex-grow font-medium">
                         {task}
                       </div>
                     </div>
-                    <div className="flex justify-between items-center opacity-60 md:opacity-40 group-hover:opacity-100 transition-opacity pt-2 border-t border-[#181a1f]" id={`card-opts-done-${i}`}>
+                    <div className="flex justify-between items-center opacity-60 md:opacity-40 group-hover:opacity-100 transition-opacity pt-2 border-t border-[#14110E]" id={`card-opts-done-${i}`}>
                       <div className="flex gap-1" id={`card-moves-done-${i}`}>
                         <button
                           onClick={(e) => { e.stopPropagation(); moveTask('done', i, -1); }}
-                          className="w-6 h-6 flex items-center justify-center text-neutral-300 hover:text-black hover:bg-[#8a7b60] bg-[#121316] rounded transition-colors cursor-pointer"
+                          className="w-6 h-6 flex items-center justify-center text-[#D1C2AD] hover:text-[#1C1915] hover:bg-[#BE984D] bg-[#1C1915] rounded transition-colors cursor-pointer"
                           id={`btn-left-done-${i}`}
                         >
                           ‹
@@ -761,7 +761,7 @@ export default function App() {
                         {/* Right arrow hidden or disabled for Done */}
                         <button
                           disabled
-                          className="w-6 h-6 flex items-center justify-center text-neutral-700 bg-neutral-900/30 rounded cursor-not-allowed opacity-50"
+                          className="w-6 h-6 flex items-center justify-center text-[#948777] bg-[#171410] rounded cursor-not-allowed opacity-50"
                           id={`btn-right-done-${i}`}
                         >
                           ›
@@ -769,7 +769,7 @@ export default function App() {
                       </div>
                       <button
                         onClick={(e) => { e.stopPropagation(); removeTask('done', i); }}
-                        className="text-[10px] uppercase tracking-tighter text-red-400 hover:text-red-500 font-sans cursor-pointer font-medium"
+                        className="text-[10px] uppercase tracking-tighter text-red-500 hover:text-red-500 font-sans cursor-pointer font-medium"
                         id={`btn-delete-done-${i}`}
                       >
                         Delete
@@ -780,7 +780,7 @@ export default function App() {
               })
             )}
           </div>
-          <div className="mt-4 pt-4 border-t border-[#2c2f3b]" id="done_add_container">
+          <div className="mt-4 pt-4 border-t border-[#382F24]" id="done_add_container">
             <div className="flex gap-2">
               <input
                 type="text"
@@ -789,11 +789,11 @@ export default function App() {
                 onKeyDown={(e) => handleKeyDown(e, 'done')}
                 id="input-done"
                 placeholder="記錄成就..."
-                className="flex-1 bg-[#121316] border border-[#2c2f3b] text-white rounded-[6px] px-3 py-2 text-sm focus:ring-1 focus:ring-[#8a7b60] focus:border-[#8a7b60] outline-none transition-all placeholder-neutral-500 font-sans"
+                className="flex-1 bg-[#1C1915] border border-[#382F24] text-[#F5EBE1] rounded-[6px] px-3 py-2 text-sm focus:ring-1 focus:ring-[#EBC463] focus:border-[#EBC463] outline-none transition-all placeholder-[#8A7D6E] font-sans"
               />
               <button
                 onClick={() => handleAddTask('done')}
-                className="bg-[#22242d] text-neutral-400 hover:text-black hover:bg-[#8a7b60] w-10 h-9 rounded-[6px] flex items-center justify-center transition-colors font-sans font-bold text-lg select-none cursor-pointer"
+                className="bg-[#1C1915] text-[#AFA18F] hover:text-[#1C1915] hover:bg-[#BE984D] w-10 h-9 rounded-[6px] flex items-center justify-center transition-colors font-sans font-bold text-lg select-none cursor-pointer"
                 id="btn-add-done"
               >
                 +
